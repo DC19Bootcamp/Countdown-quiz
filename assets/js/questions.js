@@ -1,18 +1,38 @@
-for(var i = 1; i <= 4; i++) {
-    // Create a new button element
-    var button = document.createElement("button");
-  
-    // Set the button text
-    button.innerHTML = "Button " + i;
-  
-    // Set an id for the button
-    button.id = "Question " + i;
-  
-    // Add an event listener to the button
-    button.addEventListener("click", function(){
-        alert("Button " + i + " was clicked");
-    });
-  
-    // Append the button to the body
-    document.body.appendChild(button);
-  }
+var questions = [
+    {
+        prompt: "What color is the sky?\n(a) Red\n (b) Blue\n (c) Orange",
+        choices: ["Red", "Blue", "Orange"],
+        answer: "Blue"
+    },
+    {
+        prompt: "What color is an orange?\n(a) Red\n (b) Blue\n (c) Orange",
+        choices: ["Red", "Blue", "Orange"],
+        answer: "Orange"
+    },
+];
+
+var currentQuestion = 0;
+
+// Starts the quiz when the start button is clicked
+document.getElementById("start").addEventListener("click", startQuiz);
+
+function startQuiz() {
+    // Hide the start screen
+    document.getElementById("start-screen").classList.add("hide");
+    // Displays the first question and its choices
+    displayQuestion();
+}
+
+function displayQuestion() {
+    // Displays the question prompt
+    document.getElementById("question-title").innerText = questions[currentQuestion].prompt;
+    // Displays the choices
+    var choices = document.getElementById("choices");
+    choices.innerHTML = "";
+    for (var i = 0; i < questions[currentQuestion].choices.length; i++) {
+        var choice = document.createElement("button");
+        choice.innerText = questions[currentQuestion].choices[i];
+        choice.classList.add("choice-button");
+        choices.appendChild(choice);
+    }
+}
